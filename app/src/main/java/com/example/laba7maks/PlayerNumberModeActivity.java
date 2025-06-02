@@ -135,6 +135,13 @@ public class PlayerNumberModeActivity extends BaseActivity {
         btnReset.setVisibility(View.GONE);
     }
     private void setListenerBtnLowerAndHigner(){
+        if ((high && compNumber >= playerNumber) || (!high && compNumber <= playerNumber)) {
+            tvStatus.setText("Вы обманываете! Игра окончена.");
+            btnHigher.setVisibility(View.GONE);
+            btnLower.setVisibility(View.GONE);
+            btnReset.setVisibility(View.VISIBLE);
+            return;
+        }
         compNumber = game.checkNumPlayer(compNumber, high);
         tvNumComp.setText("Компьютер предлагает число: " + String.valueOf(compNumber));
         if (compNumber == playerNumber) {
