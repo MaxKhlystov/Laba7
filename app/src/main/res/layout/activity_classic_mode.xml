@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
+        android:minHeight="100dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerAttempts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/etGuess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ваше число"
+        android:inputType="number"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Старт"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Проверить"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Заново"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btnBackToLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Назад"/>
+</LinearLayout>

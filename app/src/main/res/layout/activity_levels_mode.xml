@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp">
+
+    <Button
+        android:id="@+id/btnLevel1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Уровень 1"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnLevel2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Уровень 2"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnLevel3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Уровень 3"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnLevel4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Уровень 4"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnLevel5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Уровень 5"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnResetProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сбросить уровни"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btnBackToMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Назад" />
+</LinearLayout>
