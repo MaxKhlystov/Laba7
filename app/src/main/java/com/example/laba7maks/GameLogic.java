@@ -10,15 +10,21 @@ public class GameLogic {
     private long startTime;
     private long timeLimitMillis = 60000;
     private boolean isTimeMode;
+    private boolean isTesterMode = false;
 
     public GameLogic() {
-        resetGameClassic();
+        resetGameClassic(isTesterMode);
         resetGamePlayerNum();
         isTimeMode = false;
     }
 
-    public void resetGameClassic() {
-        secretNumber = (int) (Math.random() * 1) + 1;
+    public void resetGameClassic(boolean isTesterMode) {
+        if (isTesterMode){
+            secretNumber = (int) (Math.random() * 1) + 1;
+        }
+        else {
+            secretNumber = (int) (Math.random() * 100) + 1;
+        }
         attempts = 0;
         isGameOver = false;
         isTimeMode = false;

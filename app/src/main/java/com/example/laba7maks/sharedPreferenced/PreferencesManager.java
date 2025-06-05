@@ -31,11 +31,13 @@ public class PreferencesManager {
     public boolean isAchievementUnlocked(String achievementKey) {
         return sharedPreferences.getBoolean(achievementKey, false);
     }
-    // Специфичные методы для ачивок
     public void unlockFirstTryAchievement() {
         unlockAchievement(KEY_ACHIEVEMENT_1);
     }
     public boolean isFirstTryAchievementUnlocked() {
         return isAchievementUnlocked(KEY_ACHIEVEMENT_1);
+    }
+    public void resetAchivement(){
+        sharedPreferences.edit().putBoolean(KEY_ACHIEVEMENT_1, false).apply();
     }
 }

@@ -19,6 +19,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"/>
 
+    <CheckBox
+        android:id="@+id/cbTesterMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Согласен с условиями"
+        android:checked="true"/>
+
     <EditText
         android:id="@+id/etGuess"
         android:layout_width="match_parent"

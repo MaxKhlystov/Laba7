@@ -97,7 +97,7 @@ public class TimeModeActivity extends BaseActivity {
 
     private void setListenerBtnReset() {
         stopTimer();
-        game.resetGameClassic();
+        game.resetGameClassic(false);
         tvHint.setText("Выберите время и нажмите 'Старт'");
         tvTimer.setText("");
         btnStart.setVisibility(View.VISIBLE);

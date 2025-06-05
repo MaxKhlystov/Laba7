@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.laba7maks.achivement.AchievementBanner;
 import com.example.laba7maks.sharedPreferenced.PreferencesManager;
 
 public class ClassicModeActivity extends BaseActivity {
@@ -16,9 +18,11 @@ public class ClassicModeActivity extends BaseActivity {
     private EditText etGuess;
     private Spinner spinnerAttempts;
     private Button btnStart, btnSubmit, btnReset, btnBack;
+    private CheckBox cbTesterMode;
     private boolean guessCompNumFrom1Try = false;
     private PreferencesManager preferencesManager;
-    int maxAttempts;
+    private int maxAttempts;
+    private boolean isTesterMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +66,14 @@ public class ClassicModeActivity extends BaseActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAttempts.setAdapter(adapter);
         spinnerAttempts.setSelection(14);
-
+        cbTesterMode = findViewById(R.id.cbTesterMode);
         tvHint.setText("Выберите количество попыток и нажмите 'Старт'");
     }
     private void setListenerBtnStart(){
         maxAttempts = (int) spinnerAttempts.getSelectedItem();
         game.setMaxAttempts(maxAttempts);
-        game.resetGameClassic();
+        isTesterMode = cbTesterMode.isChecked();
+        game.resetGameClassic(isTesterMode);
         tvHint.setText("Угадайте число от 1 до 100");
         updateAttemptsDisplay();
 
@@ -94,6 +99,10 @@ public class ClassicModeActivity extends BaseActivity {
                 if (checkGuessCompNumFrom1Try())
                 {
                     tvHint.setText(result + "\nВы отгадали число с первой попытки!");
+                    AchievementBanner.showShort(
+                            findViewById(android.R.id.content),
+                            "Новое достижение!"
+                    );
                     preferencesManager.unlockFirstTryAchievement();
                 }
                 btnSubmit.setVisibility(View.GONE);
@@ -110,7 +119,7 @@ public class ClassicModeActivity extends BaseActivity {
         }
     }
     private void setListenerBtnReset(){
-        game.resetGameClassic();
+        game.resetGameClassic(isTesterMode);
         tvHint.setText("Выберите количество попыток и нажмите 'Старт'");
         btnStart.setVisibility(View.VISIBLE);
         btnSubmit.setVisibility(View.GONE);

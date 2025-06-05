@@ -1,4 +1,4 @@
-package com.example.laba7maks;
+package com.example.laba7maks.achivement;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,10 +6,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.laba7maks.BaseActivity;
+import com.example.laba7maks.R;
 import com.example.laba7maks.sharedPreferenced.PreferencesManager;
 
 public class AchivementActivity extends BaseActivity {
     private Button btnBack;
+    private Button btnResetAchivement;
     private PreferencesManager preferencesManager;
 
     @Override
@@ -19,8 +23,10 @@ public class AchivementActivity extends BaseActivity {
 
         preferencesManager = new PreferencesManager(this);
         btnBack = findViewById(R.id.btnBack);
+        btnResetAchivement = findViewById(R.id.btnResetAchivement);
         setupAchievements();
         btnBack.setOnClickListener(v -> goBack());
+        btnResetAchivement.setOnClickListener(v->setListenerBtnResetAchivement());
     }
 
     private void setupAchievements() {
@@ -30,7 +36,7 @@ public class AchivementActivity extends BaseActivity {
         addAchievementCard(
                 achievementsContainer,
                 R.drawable.ic_achievement_1, // Замените на свою иконку
-                "Мастер интуиции",
+                "Я даже не напрягался",
                 "Угадайте число с первой попытки",
                 preferencesManager.isFirstTryAchievementUnlocked()
         );
@@ -60,5 +66,8 @@ public class AchivementActivity extends BaseActivity {
         }
 
         container.addView(achievementCard);
+    }
+    private void setListenerBtnResetAchivement(){
+        preferencesManager.resetAchivement();
     }
 }
