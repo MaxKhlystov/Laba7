@@ -66,7 +66,7 @@ public class GameLogic {
 
     public int checkNumPlayer(int num, boolean high) {
         attempts++;
-        if (num == secretNumber || attempts>=5) {
+        if (num == secretNumber || attempts>=6) {
             isGameOver = true;
             return num;
         }

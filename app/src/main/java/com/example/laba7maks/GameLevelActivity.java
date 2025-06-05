@@ -1,44 +1,37 @@
 package com.example.laba7maks;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.laba7maks.sharedPreferenced.PreferencesManager;
 import java.util.Random;
 
 public class GameLevelActivity extends BaseActivity {
-
     private int level, maxNumber, maxAttempts;
     private int targetNumber, attemptsLeft;
     private TextView tvStatus;
     private EditText etInput;
     private Button btnSubmit, btnAgain, btnBackToLevel;
     private boolean isGameOver = false;
+    private PreferencesManager preferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_level);
 
+        preferencesManager = new PreferencesManager(this);
         level = getIntent().getIntExtra("level", 1);
         initializeComponents();
         setupLevel(level);
         generateNumber();
         btnSubmit.setOnClickListener(v -> checkGuess());
 
-        btnBackToLevel.setOnClickListener(v -> {
-            goBack();
-        });
-
-        btnAgain.setOnClickListener(v -> {
-            setActionBtnAgain();
-        });
+        btnBackToLevel.setOnClickListener(v -> goBack());
+        btnAgain.setOnClickListener(v -> setActionBtnAgain());
     }
 
-    private void initializeComponents(){
+    private void initializeComponents() {
         tvStatus = findViewById(R.id.tvStatus);
         etInput = findViewById(R.id.etInput);
         etInput.setEnabled(true);
@@ -47,7 +40,7 @@ public class GameLevelActivity extends BaseActivity {
         btnBackToLevel = findViewById(R.id.btnBackToLevel);
     }
 
-    private void setActionBtnAgain(){
+    private void setActionBtnAgain() {
         generateNumber();
         attemptsLeft = maxAttempts;
         btnSubmit.setEnabled(true);
@@ -62,11 +55,11 @@ public class GameLevelActivity extends BaseActivity {
 
     private void setupLevel(int level) {
         switch (level) {
-            case 1: maxNumber = 20; maxAttempts = 5; break;
+            case 1: maxNumber = 20; maxAttempts = 6; break;
             case 2: maxNumber = 40; maxAttempts = 8; break;
-            case 3: maxNumber = 60; maxAttempts = 11; break;
-            case 4: maxNumber = 80; maxAttempts = 15; break;
-            case 5: maxNumber = 100; maxAttempts = 10; break;
+            case 3: maxNumber = 60; maxAttempts = 10; break;
+            case 4: maxNumber = 80; maxAttempts = 12; break;
+            case 5: maxNumber = 100; maxAttempts = 8; break;
             default: maxNumber = 100; maxAttempts = 10;
         }
         attemptsLeft = maxAttempts;
@@ -97,10 +90,9 @@ public class GameLevelActivity extends BaseActivity {
                 hideKeyboard();
                 etInput.setText("");
 
-                SharedPreferences prefs = getSharedPreferences("level_progress", MODE_PRIVATE);
-                int unlockedLevel = prefs.getInt("unlocked_level", 1);
+                int unlockedLevel = preferencesManager.getUnlockedLevel();
                 if (level == unlockedLevel && level < 5) {
-                    prefs.edit().putInt("unlocked_level", level + 1).apply();
+                    preferencesManager.saveUnlockedLevel(level + 1);
                 }
 
             } else if (attemptsLeft > 0) {

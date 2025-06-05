@@ -1,17 +1,15 @@
 package com.example.laba7maks;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.laba7maks.sharedPreferenced.PreferencesManager;
 
 public class LevelsModeActivity extends BaseActivity {
-
     private Button[] levelButtons = new Button[5];
     private Button btnBackToMain, btnResetProgress;
-    private SharedPreferences prefs;
+    private PreferencesManager preferencesManager;
     int unlockedLevel = 1;
 
     @Override
@@ -19,8 +17,8 @@ public class LevelsModeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels_mode);
 
-        prefs = getSharedPreferences("level_progress", MODE_PRIVATE);
-        unlockedLevel = prefs.getInt("unlocked_level", 1);
+        preferencesManager = new PreferencesManager(this);
+        unlockedLevel = preferencesManager.getUnlockedLevel();
 
         levelButtons[0] = findViewById(R.id.btnLevel1);
         levelButtons[1] = findViewById(R.id.btnLevel2);
@@ -36,8 +34,7 @@ public class LevelsModeActivity extends BaseActivity {
         btnBackToMain.setOnClickListener(v -> finish());
 
         btnResetProgress.setOnClickListener(v -> {
-            // Сбрасываем прогресс до 1 уровня
-            prefs.edit().putInt("unlocked_level", 1).apply();
+            preferencesManager.resetProgress();
             unlockedLevel = 1;
             setEnableBtn();
             updateResetButtonVisibility();
@@ -47,7 +44,7 @@ public class LevelsModeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        unlockedLevel = prefs.getInt("unlocked_level", 1);
+        unlockedLevel = preferencesManager.getUnlockedLevel();
         setEnableBtn();
         updateResetButtonVisibility();
     }
@@ -69,7 +66,6 @@ public class LevelsModeActivity extends BaseActivity {
     }
 
     private void updateResetButtonVisibility() {
-        // Показываем кнопку сброса только если все уровни пройдены
         btnResetProgress.setVisibility(unlockedLevel >= 5 ? View.VISIBLE : View.GONE);
     }
 }
