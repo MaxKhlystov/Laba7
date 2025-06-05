@@ -8,20 +8,23 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.laba7maks.sharedPreferenced.PreferencesManager;
+
 public class ClassicModeActivity extends BaseActivity {
     private GameLogic game;
     private TextView tvHint;
     private EditText etGuess;
     private Spinner spinnerAttempts;
     private Button btnStart, btnSubmit, btnReset, btnBack;
-    private boolean guessCompNumFrom1Time = false;
+    private boolean guessCompNumFrom1Try = false;
+    private PreferencesManager preferencesManager;
     int maxAttempts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classic_mode);
-
+        preferencesManager = new PreferencesManager(this);
         initializeСomponents();
 
         btnStart.setOnClickListener(v -> {
@@ -88,9 +91,10 @@ public class ClassicModeActivity extends BaseActivity {
             etGuess.setText("");
 
             if (game.isGameOver()) {
-                if (checkGuessCompNumFrom1Time())
+                if (checkGuessCompNumFrom1Try())
                 {
                     tvHint.setText(result + "\nВы отгадали число с первой попытки!");
+                    preferencesManager.unlockFirstTryAchievement();
                 }
                 btnSubmit.setVisibility(View.GONE);
                 hideKeyboard();
@@ -122,11 +126,11 @@ public class ClassicModeActivity extends BaseActivity {
             tvHint.append("\nОсталось попыток: " + game.getRemainingAttempts());
         }
     }
-    private boolean checkGuessCompNumFrom1Time(){
-        if (guessCompNumFrom1Time){
+    private boolean checkGuessCompNumFrom1Try(){
+        if (guessCompNumFrom1Try){
             return false;
         }
-        guessCompNumFrom1Time = true;
+        guessCompNumFrom1Try = true;
         if (maxAttempts - game.getRemainingAttempts() == 1){
             return true;
         }
