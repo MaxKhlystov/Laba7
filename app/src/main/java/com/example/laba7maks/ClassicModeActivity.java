@@ -14,6 +14,8 @@ public class ClassicModeActivity extends BaseActivity {
     private EditText etGuess;
     private Spinner spinnerAttempts;
     private Button btnStart, btnSubmit, btnReset, btnBack;
+    private boolean guessCompNumFrom1Time = false;
+    int maxAttempts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,6 @@ public class ClassicModeActivity extends BaseActivity {
         });
     }
 
-    private void updateAttemptsDisplay() {
-        if (!game.isGameOver()) {
-            tvHint.append("\nОсталось попыток: " + game.getRemainingAttempts());
-        }
-    }
     private void initializeСomponents(){
         game = new GameLogic();
         tvHint = findViewById(R.id.tvHint);
@@ -66,7 +63,7 @@ public class ClassicModeActivity extends BaseActivity {
         tvHint.setText("Выберите количество попыток и нажмите 'Старт'");
     }
     private void setListenerBtnStart(){
-        int maxAttempts = (int) spinnerAttempts.getSelectedItem();
+        maxAttempts = (int) spinnerAttempts.getSelectedItem();
         game.setMaxAttempts(maxAttempts);
         game.resetGameClassic();
         tvHint.setText("Угадайте число от 1 до 100");
@@ -91,6 +88,10 @@ public class ClassicModeActivity extends BaseActivity {
             etGuess.setText("");
 
             if (game.isGameOver()) {
+                if (checkGuessCompNumFrom1Time())
+                {
+                    tvHint.setText(result + "\nВы отгадали число с первой попытки!");
+                }
                 btnSubmit.setVisibility(View.GONE);
                 hideKeyboard();
                 etGuess.setVisibility(View.GONE);
@@ -114,5 +115,21 @@ public class ClassicModeActivity extends BaseActivity {
         etGuess.setVisibility(View.GONE);
         spinnerAttempts.setEnabled(true);
         etGuess.setText("");
+    }
+
+    private void updateAttemptsDisplay() {
+        if (!game.isGameOver()) {
+            tvHint.append("\nОсталось попыток: " + game.getRemainingAttempts());
+        }
+    }
+    private boolean checkGuessCompNumFrom1Time(){
+        if (guessCompNumFrom1Time){
+            return false;
+        }
+        guessCompNumFrom1Time = true;
+        if (maxAttempts - game.getRemainingAttempts() == 1){
+            return true;
+        }
+        else return false;
     }
 }

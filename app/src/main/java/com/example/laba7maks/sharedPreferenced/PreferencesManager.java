@@ -14,19 +14,16 @@ public class PreferencesManager {
         sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
-    // Сохраняет последний открытый уровень
     public void saveUnlockedLevel(int level) {
         sharedPreferences.edit()
                 .putInt(KEY_UNLOCKED_LEVEL, level)
                 .apply();
     }
 
-    // Возвращает последний открытый уровень (по умолчанию 1)
     public int getUnlockedLevel() {
         return sharedPreferences.getInt(KEY_UNLOCKED_LEVEL, 1);
     }
 
-    // Сбрасывает прогресс до 1 уровня
     public void resetProgress() {
         saveUnlockedLevel(1);
     }

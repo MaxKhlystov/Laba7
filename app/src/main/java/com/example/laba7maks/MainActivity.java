@@ -18,6 +18,7 @@ public class MainActivity extends BaseActivity {
         Button btnPlayerNumber = findViewById(R.id.btnPlayerNumber);
         Button btnLevelsMode = findViewById(R.id.btnLevelsMode);
         Button btnTimeMode = findViewById(R.id.btnTimeMode);
+        Button btnAchivements = findViewById(R.id.btnAchivements);
         Button btnExit = findViewById(R.id.btnExit);
 
         btnClassic.setOnClickListener(v -> {
@@ -48,6 +49,14 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, TimeModeActivity.class));
             } catch (Exception e) {
                 Log.e("MainActivity", "Ошибка запуска TimeModeActivity", e);
+            }
+        });
+
+        btnAchivements.setOnClickListener(v -> {
+            try {
+                startActivity(new Intent(this, AchivementActivity.class));
+            } catch (Exception e) {
+                Log.e("MainActivity", "Ошибка запуска AchivementActivity", e);
             }
         });
 

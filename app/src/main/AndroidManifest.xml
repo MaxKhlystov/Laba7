@@ -23,6 +23,7 @@
         <activity android:name=".LevelsModeActivity" />
         <activity android:name=".GameLevelActivity" />
         <activity android:name=".TimeModeActivity" />
+        <activity android:name=".AchivementActivity" />
     </application>
 
 </manifest>

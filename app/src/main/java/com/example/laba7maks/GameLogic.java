@@ -18,7 +18,7 @@ public class GameLogic {
     }
 
     public void resetGameClassic() {
-        secretNumber = (int) (Math.random() * 100) + 1;
+        secretNumber = (int) (Math.random() * 1) + 1;
         attempts = 0;
         isGameOver = false;
         isTimeMode = false;

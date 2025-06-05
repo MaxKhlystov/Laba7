@@ -30,6 +30,7 @@
         android:textSize="18sp"
         android:layout_marginBottom="16dp"
         android:visibility="gone"/>
+
     <Button
         android:id="@+id/btnStart"
         android:layout_width="match_parent"
