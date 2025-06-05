@@ -10,14 +10,14 @@
         android:id="@+id/btnClassic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Угадать число компьютера"
+        android:text="Классика"
         android:layout_marginBottom="16dp"/>
 
     <Button
         android:id="@+id/btnPlayerNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Компьютер угадывает мое число"
+        android:text="Угадать моё число"
         android:layout_marginBottom="16dp"/>
 
     <Button

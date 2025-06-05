@@ -66,7 +66,7 @@ public class GameLogic {
 
     public int checkNumPlayer(int num, boolean high) {
         attempts++;
-        if (num == secretNumber) {
+        if (num == secretNumber || attempts>=5) {
             isGameOver = true;
             return num;
         }
@@ -74,9 +74,6 @@ public class GameLogic {
             min = Math.max(min, num + 1);
         } else {
             max = Math.min(max, num - 1);
-        }
-        if (min >= max) {
-            isGameOver = true;
         }
         return (max + min) / 2;
     }

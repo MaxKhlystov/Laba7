@@ -104,9 +104,9 @@ public class TimeModeActivity extends BaseActivity {
         btnSubmit.setVisibility(View.GONE);
         btnReset.setVisibility(View.GONE);
         spinnerTime.setEnabled(true);
-        etGuess.setEnabled(false);
-        etGuess.setText("");
         hideKeyboard();
+        etGuess.setVisibility(View.GONE);
+        etGuess.setText("");
     }
 
     private void startTimer() {

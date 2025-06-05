@@ -88,15 +88,15 @@ public class ClassicModeActivity extends BaseActivity {
 
             String result = game.checkGuess(guess);
             tvHint.setText(result);
-            etGuess.setText(""); // Очищаем поле
+            etGuess.setText("");
 
             if (game.isGameOver()) {
                 btnSubmit.setVisibility(View.GONE);
-                etGuess.setEnabled(false);
+                hideKeyboard();
+                etGuess.setVisibility(View.GONE);
                 btnStart.setVisibility(View.VISIBLE);
                 btnReset.setVisibility(View.GONE);
                 spinnerAttempts.setEnabled(true);
-                hideKeyboard();
             } else {
                 updateAttemptsDisplay();
             }
@@ -110,8 +110,9 @@ public class ClassicModeActivity extends BaseActivity {
         btnStart.setVisibility(View.VISIBLE);
         btnSubmit.setVisibility(View.GONE);
         btnReset.setVisibility(View.GONE);
+        hideKeyboard();
+        etGuess.setVisibility(View.GONE);
         spinnerAttempts.setEnabled(true);
         etGuess.setText("");
-        hideKeyboard();
     }
 }

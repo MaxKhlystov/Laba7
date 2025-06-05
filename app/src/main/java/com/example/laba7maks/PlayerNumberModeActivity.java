@@ -74,8 +74,7 @@ public class PlayerNumberModeActivity extends BaseActivity {
         btnBack = findViewById(R.id.btnBackToLevel);
         btnReset = findViewById(R.id.btnReset);
         btnReset.setVisibility(View.GONE);
-        btnHigher.setVisibility(View.GONE);
-        btnLower.setVisibility(View.GONE);
+        setVisibleBtnLowerAndHigher(1);
     }
 
     private void setListenerBtnAction(){
@@ -100,8 +99,6 @@ public class PlayerNumberModeActivity extends BaseActivity {
                 etInput.setEnabled(false);
                 tvNumComp.setVisibility(View.VISIBLE);
                 btnAction.setVisibility(View.GONE);
-                btnHigher.setVisibility(View.GONE);
-                btnLower.setVisibility(View.GONE);
                 hideKeyboard();
             } catch (NumberFormatException e) {
                 tvStatus.setText("Введите корректное число!");
@@ -115,30 +112,30 @@ public class PlayerNumberModeActivity extends BaseActivity {
         btnStart.setVisibility(View.GONE);
         etInput.setVisibility(View.GONE);
         btnHigher.setVisibility(View.VISIBLE);
-        btnLower.setVisibility(View.VISIBLE);
         btnReset.setVisibility(View.VISIBLE);
+        setVisibleBtnLowerAndHigher(0);
+        checkNumFromStart();
     }
     private void setListenerBtnReset(){
         numberSet = false;
         attempts = 0;
         game.resetGamePlayerNum();
         tvStatus.setText("Загадайте число от 1 до 100");
-        etInput.setHint("Ваше число");
         etInput.setText("");
         tvNumComp.setText("Кликайте кнопку 'Начать' и победите компьютер!");
         btnAction.setVisibility(View.VISIBLE);
         etInput.setVisibility(View.VISIBLE);
+        etInput.setEnabled(true);
         tvNumComp.setVisibility(View.GONE);
         btnStart.setVisibility(View.GONE);
-        btnHigher.setVisibility(View.GONE);
-        btnLower.setVisibility(View.GONE);
+        setVisibleBtnLowerAndHigher(1);
         btnReset.setVisibility(View.GONE);
     }
     private void setListenerBtnLowerAndHigner(){
         if ((high && compNumber >= playerNumber) || (!high && compNumber <= playerNumber)) {
             tvStatus.setText("Вы обманываете! Игра окончена.");
-            btnHigher.setVisibility(View.GONE);
-            btnLower.setVisibility(View.GONE);
+            tvNumComp.setText("Нажмите кнопку 'Заново' и постарайтесь не обманывать!");
+            setVisibleBtnLowerAndHigher(1);
             btnReset.setVisibility(View.VISIBLE);
             return;
         }
@@ -147,12 +144,27 @@ public class PlayerNumberModeActivity extends BaseActivity {
         if (compNumber == playerNumber) {
             tvStatus.setText("Компьютер угадал ваше число!");
             tvNumComp.setText("Ваше число: " + String.valueOf(playerNumber));
-            btnHigher.setVisibility(View.GONE);
-            btnLower.setVisibility(View.GONE);
+            setVisibleBtnLowerAndHigher(1);
         } else if (game.isGameOver()) {
             tvStatus.setText("Компьютер не угадал число");
+            tvNumComp.setText("Вы выйграли компьютер!");
+            setVisibleBtnLowerAndHigher(1);
+        }
+    }
+    private void setVisibleBtnLowerAndHigher(int visible){
+        if (visible == 0){
+            btnHigher.setVisibility(View.VISIBLE);
+            btnLower.setVisibility(View.VISIBLE);
+        }else {
             btnHigher.setVisibility(View.GONE);
             btnLower.setVisibility(View.GONE);
+        }
+    }
+    private void checkNumFromStart(){
+        if (compNumber == playerNumber) {
+            tvStatus.setText("Компьютер угадал ваше число!");
+            tvNumComp.setText("Ваше число: " + String.valueOf(playerNumber));
+            setVisibleBtnLowerAndHigher(1);
         }
     }
 }
