@@ -43,10 +43,26 @@ public class AchivementActivity extends BaseActivity {
                 R.drawable.ic_achievement_1, // Замените на свою иконку
                 "Я даже не напрягался",
                 "Угадайте число с первой попытки",
-                preferencesManager.isFirstTryAchievementUnlocked()
+                preferencesManager.isFirstAchievementUnlocked()
         );
 
-        // Добавьте другие ачивки аналогично
+        // Ачивка 2: Не угадать с 15 попыток
+        addAchievementCard(
+                achievementsContainer,
+                R.drawable.ic_achievement_2, // Замените на свою иконку
+                "Тугодум",
+                "Не угадать число с 15 попыток",
+                preferencesManager.isSecondAchievementUnlocked()
+        );
+
+        // Ачивка 3: Угадать с последней попытки
+        addAchievementCard(
+                achievementsContainer,
+                R.drawable.ic_achievement_3, // Замените на свою иконку
+                "На волоске",
+                "Угадать число на последней попытке",
+                preferencesManager.isThirdAchievementUnlocked()
+        );
     }
 
     private void addAchievementCard(LinearLayout container, int iconRes,

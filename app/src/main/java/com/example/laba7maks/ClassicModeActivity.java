@@ -20,6 +20,8 @@ public class ClassicModeActivity extends BaseActivity {
     private Button btnStart, btnSubmit, btnReset, btnBack;
     private CheckBox cbTesterMode;
     private boolean guessCompNumFrom1Try = false;
+    private boolean notGuessCompNumFrom15Try = false;
+    private boolean guessCompNumOnLastTry = false;
     private PreferencesManager preferencesManager;
     private int maxAttempts;
     private boolean isTesterMode;
@@ -104,8 +106,25 @@ public class ClassicModeActivity extends BaseActivity {
                             findViewById(android.R.id.content),
                             "Новое достижение!"
                     );
-                    preferencesManager.unlockFirstTryAchievement();
+                    preferencesManager.unlockFirstAchievement();
                 }
+                if (checkGuessCompNumFrom15Try(true) && result.contains("Вы проиграли!"));
+                {
+                    AchievementBanner.showShort(
+                             findViewById(android.R.id.content),
+                            "Новое достижение!"
+                    );
+                    preferencesManager.unlockSecondAchievement();
+                }
+                if (checkGuessCompNumFrom15Try(false) && result.contains("Поздравляем!"))
+                {
+                    AchievementBanner.showShort(
+                            findViewById(android.R.id.content),
+                            "Новое достижение!"
+                    );
+                    preferencesManager.unlockThirdAchievement();
+                }
+
                 btnSubmit.setVisibility(View.GONE);
                 hideKeyboard();
                 etGuess.setVisibility(View.GONE);
@@ -147,5 +166,19 @@ public class ClassicModeActivity extends BaseActivity {
             return true;
         }
         else return false;
+    }
+    private boolean checkGuessCompNumFrom15Try(boolean is15Tryes){
+        if (guessCompNumOnLastTry || notGuessCompNumFrom15Try){
+            return false;
+        }
+        if (is15Tryes && maxAttempts - game.getRemainingAttempts() == 15){
+            notGuessCompNumFrom15Try = true;
+            return true;
+        }
+        if (!is15Tryes && maxAttempts - game.getRemainingAttempts() == maxAttempts){
+            guessCompNumOnLastTry = true;
+            return true;
+        }
+        return false;
     }
 }

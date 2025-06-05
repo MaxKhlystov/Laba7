@@ -7,7 +7,8 @@ public class PreferencesManager {
     private static final String PREFS_NAME = "game_prefs";
     private static final String KEY_UNLOCKED_LEVEL = "unlocked_level";
     private static final String KEY_ACHIEVEMENT_1 = "achievement_first_try";
-    // Добавьте другие ключи для ачивок
+    private static final String KEY_ACHIEVEMENT_2 = "achievement_15_lose";
+    private static final String KEY_ACHIEVEMENT_3 = "achievement_15_win";
 
     private final SharedPreferences sharedPreferences;
     public PreferencesManager(Context context) {
@@ -24,20 +25,38 @@ public class PreferencesManager {
         sharedPreferences.edit().putInt(KEY_UNLOCKED_LEVEL, 1).apply();
     }
 
-    // Методы для ачивок
     public void unlockAchievement(String achievementKey) {
         sharedPreferences.edit().putBoolean(achievementKey, true).apply();
     }
     public boolean isAchievementUnlocked(String achievementKey) {
         return sharedPreferences.getBoolean(achievementKey, false);
     }
-    public void unlockFirstTryAchievement() {
+    //Первая ачивка
+    public void unlockFirstAchievement() {
         unlockAchievement(KEY_ACHIEVEMENT_1);
     }
-    public boolean isFirstTryAchievementUnlocked() {
+    public boolean isFirstAchievementUnlocked() {
         return isAchievementUnlocked(KEY_ACHIEVEMENT_1);
     }
+    //Вторая ачивка
+    public void unlockSecondAchievement() {
+        unlockAchievement(KEY_ACHIEVEMENT_2);
+    }
+    public boolean isSecondAchievementUnlocked() {
+        return isAchievementUnlocked(KEY_ACHIEVEMENT_2);
+    }
+    //Третья ачивка
+    public void unlockThirdAchievement() {
+        unlockAchievement(KEY_ACHIEVEMENT_3);
+    }
+    public boolean isThirdAchievementUnlocked() {
+        return isAchievementUnlocked(KEY_ACHIEVEMENT_3);
+    }
+
+    //Сбросить ачивки
     public void resetAchivement(){
         sharedPreferences.edit().putBoolean(KEY_ACHIEVEMENT_1, false).apply();
+        sharedPreferences.edit().putBoolean(KEY_ACHIEVEMENT_2, false).apply();
+        sharedPreferences.edit().putBoolean(KEY_ACHIEVEMENT_3, false).apply();
     }
 }
