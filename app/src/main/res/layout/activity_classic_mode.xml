@@ -23,7 +23,7 @@
         android:id="@+id/cbTesterMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Согласен с условиями"
+        android:text="Тестерский мод"
         android:checked="true"/>
 
     <EditText

@@ -73,6 +73,7 @@ public class ClassicModeActivity extends BaseActivity {
         maxAttempts = (int) spinnerAttempts.getSelectedItem();
         game.setMaxAttempts(maxAttempts);
         isTesterMode = cbTesterMode.isChecked();
+        cbTesterMode.setVisibility(View.GONE);
         game.resetGameClassic(isTesterMode);
         tvHint.setText("Угадайте число от 1 до 100");
         updateAttemptsDisplay();
@@ -111,6 +112,7 @@ public class ClassicModeActivity extends BaseActivity {
                 btnStart.setVisibility(View.VISIBLE);
                 btnReset.setVisibility(View.GONE);
                 spinnerAttempts.setEnabled(true);
+                cbTesterMode.setVisibility(View.VISIBLE);
             } else {
                 updateAttemptsDisplay();
             }
@@ -124,6 +126,7 @@ public class ClassicModeActivity extends BaseActivity {
         btnStart.setVisibility(View.VISIBLE);
         btnSubmit.setVisibility(View.GONE);
         btnReset.setVisibility(View.GONE);
+        cbTesterMode.setVisibility(View.VISIBLE);
         hideKeyboard();
         etGuess.setVisibility(View.GONE);
         spinnerAttempts.setEnabled(true);
@@ -139,8 +142,8 @@ public class ClassicModeActivity extends BaseActivity {
         if (guessCompNumFrom1Try){
             return false;
         }
-        guessCompNumFrom1Try = true;
         if (maxAttempts - game.getRemainingAttempts() == 1){
+            guessCompNumFrom1Try = true;
             return true;
         }
         else return false;

@@ -15,6 +15,11 @@ public class AchivementActivity extends BaseActivity {
     private Button btnBack;
     private Button btnResetAchivement;
     private PreferencesManager preferencesManager;
+    private View achievementCard;
+    private ImageView icon;
+    private TextView titleView;
+    private TextView descView;
+    private ImageView lockIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +51,12 @@ public class AchivementActivity extends BaseActivity {
 
     private void addAchievementCard(LinearLayout container, int iconRes,
                                     String title, String description, boolean isUnlocked) {
-        View achievementCard = getLayoutInflater().inflate(R.layout.achivement_card, container, false);
+        achievementCard = getLayoutInflater().inflate(R.layout.achivement_card, container, false);
 
-        ImageView icon = achievementCard.findViewById(R.id.achievementIcon);
-        TextView titleView = achievementCard.findViewById(R.id.achievementTitle);
-        TextView descView = achievementCard.findViewById(R.id.achievementDesc);
-        ImageView lockIcon = achievementCard.findViewById(R.id.lockIcon);
+        icon = achievementCard.findViewById(R.id.achievementIcon);
+        titleView = achievementCard.findViewById(R.id.achievementTitle);
+        descView = achievementCard.findViewById(R.id.achievementDesc);
+        lockIcon = achievementCard.findViewById(R.id.lockIcon);
 
         icon.setImageResource(iconRes);
         titleView.setText(title);
@@ -69,5 +74,7 @@ public class AchivementActivity extends BaseActivity {
     }
     private void setListenerBtnResetAchivement(){
         preferencesManager.resetAchivement();
+        achievementCard.setAlpha(0.5f);
+        lockIcon.setVisibility(View.VISIBLE);
     }
 }
