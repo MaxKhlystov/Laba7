@@ -11,6 +11,9 @@ import com.example.laba7maks.BaseActivity;
 import com.example.laba7maks.R;
 import com.example.laba7maks.sharedPreferenced.PreferencesManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AchivementActivity extends BaseActivity {
     private Button btnBack;
     private Button btnResetAchivement;
@@ -20,6 +23,7 @@ public class AchivementActivity extends BaseActivity {
     private TextView titleView;
     private TextView descView;
     private ImageView lockIcon;
+    private List<View> achievementCards = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +91,29 @@ public class AchivementActivity extends BaseActivity {
         }
 
         container.addView(achievementCard);
+        achievementCards.add(achievementCard);
     }
     private void setListenerBtnResetAchivement(){
         preferencesManager.resetAchivement();
-        achievementCard.setAlpha(0.5f);
-        lockIcon.setVisibility(View.VISIBLE);
+        refreshAllAchievements();
+    }
+    private void refreshAllAchievements() {
+        for (int i = 0; i < achievementCards.size(); i++) {
+            View card = achievementCards.get(i);
+            ImageView lockIcon = card.findViewById(R.id.lockIcon);
+            boolean isUnlocked = false;
+            switch (i) {
+                case 0: isUnlocked = preferencesManager.isFirstAchievementUnlocked(); break;
+                case 1: isUnlocked = preferencesManager.isSecondAchievementUnlocked(); break;
+                case 2: isUnlocked = preferencesManager.isThirdAchievementUnlocked(); break;
+            }
+            if (isUnlocked) {
+                card.setAlpha(1f);
+                lockIcon.setVisibility(View.GONE);
+            } else {
+                card.setAlpha(0.5f);
+                lockIcon.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }
