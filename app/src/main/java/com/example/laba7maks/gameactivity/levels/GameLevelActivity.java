@@ -1,8 +1,11 @@
-package com.example.laba7maks;
+package com.example.laba7maks.gameactivity.levels;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+
+import com.example.laba7maks.BaseActivity;
+import com.example.laba7maks.R;
 import com.example.laba7maks.sharedPreferenced.PreferencesManager;
 import java.util.Random;
 

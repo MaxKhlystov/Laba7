@@ -1,4 +1,4 @@
-package com.example.laba7maks;
+package com.example.laba7maks.gameactivity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.laba7maks.BaseActivity;
+import com.example.laba7maks.R;
 import com.example.laba7maks.achivement.AchievementBanner;
 import com.example.laba7maks.sharedPreferenced.PreferencesManager;
 
@@ -102,7 +104,6 @@ public class ClassicModeActivity extends BaseActivity {
             if (game.isGameOver()) {
                 if (checkGuessCompNumFrom1Try())
                 {
-                    tvHint.setText(result + "\nВы отгадали число с первой попытки!");
                     AchievementBanner.showShort(
                             findViewById(android.R.id.content),
                             "Новое достижение!"

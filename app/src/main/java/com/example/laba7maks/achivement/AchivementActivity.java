@@ -21,9 +21,10 @@ public class AchivementActivity extends BaseActivity {
     private View achievementCard;
     private ImageView icon;
     private TextView titleView;
-    private TextView descView;
+    private TextView descView, tvStatusAchievemt;
     private ImageView lockIcon;
     private List<View> achievementCards = new ArrayList<>();
+    private int numUnlockAchievemt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,16 @@ public class AchivementActivity extends BaseActivity {
         preferencesManager = new PreferencesManager(this);
         btnBack = findViewById(R.id.btnBack);
         btnResetAchivement = findViewById(R.id.btnResetAchivement);
+        tvStatusAchievemt = findViewById(R.id.tvStatusAchievemt);
         setupAchievements();
+        showUnlockAchievement();
         btnBack.setOnClickListener(v -> goBack());
         btnResetAchivement.setOnClickListener(v->setListenerBtnResetAchivement());
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        showUnlockAchievement();
     }
 
     private void setupAchievements() {
@@ -67,6 +75,15 @@ public class AchivementActivity extends BaseActivity {
                 "Угадать число на последней попытке",
                 preferencesManager.isThirdAchievementUnlocked()
         );
+
+        // Ачивка 4: Компьютер сразу гадал число
+        addAchievementCard(
+                achievementsContainer,
+                R.drawable.ic_achievement_4, // Замените на свою иконку
+                "Восстание машин",
+                "Компьютер угадал ваше число с первой попытки",
+                preferencesManager.isFourAchievementUnlocked()
+        );
     }
 
     private void addAchievementCard(LinearLayout container, int iconRes,
@@ -95,7 +112,9 @@ public class AchivementActivity extends BaseActivity {
     }
     private void setListenerBtnResetAchivement(){
         preferencesManager.resetAchivement();
+        numUnlockAchievemt = 0;
         refreshAllAchievements();
+        showUnlockAchievement();
     }
     private void refreshAllAchievements() {
         for (int i = 0; i < achievementCards.size(); i++) {
@@ -106,6 +125,7 @@ public class AchivementActivity extends BaseActivity {
                 case 0: isUnlocked = preferencesManager.isFirstAchievementUnlocked(); break;
                 case 1: isUnlocked = preferencesManager.isSecondAchievementUnlocked(); break;
                 case 2: isUnlocked = preferencesManager.isThirdAchievementUnlocked(); break;
+                case 3: isUnlocked = preferencesManager.isFourAchievementUnlocked(); break;
             }
             if (isUnlocked) {
                 card.setAlpha(1f);
@@ -115,5 +135,20 @@ public class AchivementActivity extends BaseActivity {
                 lockIcon.setVisibility(View.VISIBLE);
             }
         }
+    }
+    private void showUnlockAchievement(){
+        for (int i = 0; i < achievementCards.size(); i++) {
+            boolean isUnlocked = false;
+            switch (i) {
+                case 0: isUnlocked = preferencesManager.isFirstAchievementUnlocked(); break;
+                case 1: isUnlocked = preferencesManager.isSecondAchievementUnlocked(); break;
+                case 2: isUnlocked = preferencesManager.isThirdAchievementUnlocked(); break;
+                case 3: isUnlocked = preferencesManager.isFourAchievementUnlocked(); break;
+            }
+            if (isUnlocked) {
+                numUnlockAchievemt++;
+            }
+        }
+        tvStatusAchievemt.setText("Открыто ачивок: " + numUnlockAchievemt + "/" + achievementCards.size());
     }
 }

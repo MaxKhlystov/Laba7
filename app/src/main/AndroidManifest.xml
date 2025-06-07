@@ -12,17 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Laba7Maks"
         tools:targetApi="31">
-        <activity android:name=".MainActivity" android:exported="true">
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ClassicModeActivity" />
-        <activity android:name=".PlayerNumberModeActivity" />
-        <activity android:name=".LevelsModeActivity" />
-        <activity android:name=".GameLevelActivity" />
-        <activity android:name=".TimeModeActivity" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".gameactivity.ClassicModeActivity" />
+        <activity android:name=".gameactivity.PlayerNumberModeActivity" />
+        <activity android:name=".gameactivity.levels.LevelsModeActivity" />
+        <activity android:name=".gameactivity.levels.GameLevelActivity" />
+        <activity android:name=".gameactivity.TimeModeActivity" />
         <activity android:name=".achivement.AchivementActivity" />
     </application>
 

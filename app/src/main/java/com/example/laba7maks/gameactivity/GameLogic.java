@@ -1,4 +1,4 @@
-package com.example.laba7maks;
+package com.example.laba7maks.gameactivity;
 
 public class GameLogic {
     private int secretNumber;

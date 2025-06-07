@@ -1,15 +1,15 @@
-package com.example.laba7maks;
+package com.example.laba7maks.gameactivity;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.laba7maks.BaseActivity;
+import com.example.laba7maks.R;
+import com.example.laba7maks.achivement.AchievementBanner;
+import com.example.laba7maks.sharedPreferenced.PreferencesManager;
 
 public class PlayerNumberModeActivity extends BaseActivity {
     private int playerNumber;
@@ -27,11 +27,14 @@ public class PlayerNumberModeActivity extends BaseActivity {
     private Button btnReset;
     private boolean high;
     private int compNumber;
+    private PreferencesManager preferencesManager;
+    private boolean is4Achievemt = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_number);
+        preferencesManager = new PreferencesManager(this);
         initializeComponents();
 
         btnAction.setOnClickListener(v -> {
@@ -107,7 +110,7 @@ public class PlayerNumberModeActivity extends BaseActivity {
     }
 
     private void setListenerBtnStart() {
-        compNumber = (int) (Math.random() * 100) + 1;
+        compNumber = (int) (Math.random() * 1) + 1;
         tvNumComp.setText("Компьютер предлагает число: " + String.valueOf(compNumber));
         btnStart.setVisibility(View.GONE);
         etInput.setVisibility(View.GONE);
@@ -165,6 +168,17 @@ public class PlayerNumberModeActivity extends BaseActivity {
             tvStatus.setText("Компьютер угадал ваше число!");
             tvNumComp.setText("Ваше число: " + String.valueOf(playerNumber));
             setVisibleBtnLowerAndHigher(1);
+            if (!is4Achievemt){
+                checkAchievemt4();
+                is4Achievemt = true;
+            }
         }
+    }
+    private void checkAchievemt4(){
+        AchievementBanner.showShort(
+                findViewById(android.R.id.content),
+                "Новое достижение!"
+        );
+        preferencesManager.unlockFourAchievement();
     }
 }

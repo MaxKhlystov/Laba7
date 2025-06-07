@@ -9,6 +9,7 @@ public class PreferencesManager {
     private static final String KEY_ACHIEVEMENT_1 = "achievement_first_try";
     private static final String KEY_ACHIEVEMENT_2 = "achievement_15_lose";
     private static final String KEY_ACHIEVEMENT_3 = "achievement_15_win";
+    private static final String KEY_ACHIEVEMENT_4 = "achievement_user_num_1_try";
 
     private final SharedPreferences sharedPreferences;
     public PreferencesManager(Context context) {
@@ -52,11 +53,19 @@ public class PreferencesManager {
     public boolean isThirdAchievementUnlocked() {
         return isAchievementUnlocked(KEY_ACHIEVEMENT_3);
     }
+    //Четвёртая ачивка
+    public void unlockFourAchievement() {
+        unlockAchievement(KEY_ACHIEVEMENT_4);
+    }
+    public boolean isFourAchievementUnlocked() {
+        return isAchievementUnlocked(KEY_ACHIEVEMENT_4);
+    }
 
     //Сбросить ачивки
     public void resetAchivement(){
         sharedPreferences.edit().putBoolean(KEY_ACHIEVEMENT_1, false).apply();
         sharedPreferences.edit().putBoolean(KEY_ACHIEVEMENT_2, false).apply();
         sharedPreferences.edit().putBoolean(KEY_ACHIEVEMENT_3, false).apply();
+        sharedPreferences.edit().putBoolean(KEY_ACHIEVEMENT_4, false).apply();
     }
 }

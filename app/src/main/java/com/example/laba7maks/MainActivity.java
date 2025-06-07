@@ -7,6 +7,10 @@ import android.util.Log;
 import android.widget.Button;
 
 import com.example.laba7maks.achivement.AchivementActivity;
+import com.example.laba7maks.gameactivity.ClassicModeActivity;
+import com.example.laba7maks.gameactivity.PlayerNumberModeActivity;
+import com.example.laba7maks.gameactivity.TimeModeActivity;
+import com.example.laba7maks.gameactivity.levels.LevelsModeActivity;
 
 public class MainActivity extends BaseActivity {
     @Override

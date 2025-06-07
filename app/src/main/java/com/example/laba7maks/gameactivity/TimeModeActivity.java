@@ -1,4 +1,4 @@
-package com.example.laba7maks;
+package com.example.laba7maks.gameactivity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.laba7maks.BaseActivity;
+import com.example.laba7maks.R;
 
 public class TimeModeActivity extends BaseActivity {
     private GameLogic game;

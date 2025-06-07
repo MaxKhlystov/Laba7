@@ -1,9 +1,12 @@
-package com.example.laba7maks;
+package com.example.laba7maks.gameactivity.levels;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.laba7maks.BaseActivity;
+import com.example.laba7maks.R;
 import com.example.laba7maks.sharedPreferenced.PreferencesManager;
 
 public class LevelsModeActivity extends BaseActivity {
